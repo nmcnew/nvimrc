@@ -30,6 +30,7 @@ return {
                 "rust_analyzer",
                 "tsserver",
                 "csharp_ls",
+                "svelte",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -38,7 +39,6 @@ return {
                         capabilities = capabilities
                     }
                 end,
-
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
