@@ -31,7 +31,7 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { "svelte", "typescript", "css", "html", "scss", "lua", "vim", "c_sharp", "vimdoc", "rust", "go" },
+    ensure_installed = { "svelte", "typescript", "css", "html", "lua", "vim", "c_sharp", "vimdoc", "rust", "go" },
     auto_install = true,
     highlight = { enable = true },
 }
