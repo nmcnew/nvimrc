@@ -22,7 +22,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
-require("kanagawa").load("dragon")
+require("kanagawa").load("wave")
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
