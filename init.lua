@@ -1,9 +1,9 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.o.tabstop=4
-vim.o.shiftwidth=4
-vim.o.expandtab=true
-vim.o.smarttab=true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.smarttab = true
 vim.opt.termguicolors = true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -31,7 +31,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     ensure_installed = { "svelte", "typescript", "css", "html", "lua", "vim", "c_sharp", "vimdoc", "rust", "go" },
     auto_install = true,
     highlight = { enable = true },
@@ -59,25 +59,32 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 })
 
+local PreWriteGroup = vim.api.nvim_create_augroup('PreWriteGroup', {})
+vim.api.nvim_create_autocmd('BufWritePre', {
+    group = PreWriteGroup,
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end
+})
 if vim.fn.has("wsl") == 1 then
     if vim.fn.executable("wl-copy") == 0 then
         print("Seems like you are under wsl, but do not have wl-copy, this integration won't work")
     else
         vim.g.clipboard = {
             name = 'wl-clipboard (wsl)',
-        copy = {
-            ["+"] = 'wl-copy --foreground --type text/plain',
-            ["*"] = 'wl-copy --foreground --primary --type text/plain',
-        },
-        paste = {
-            ["+"] = (function()
-                return vim.fn.systemlist('wl-psate --no-newline|sed -e "s/\r$//"', {''}, 1)
-            end),
-            ["*"] = (function()
-                return vim.fn.systemlist('wl-psate --primary --no-newline|sed -e "s/\r$//"', {''}, 1)
-            end),
+            copy = {
+                ["+"] = 'wl-copy --foreground --type text/plain',
+                ["*"] = 'wl-copy --foreground --primary --type text/plain',
+            },
+            paste = {
+                ["+"] = (function()
+                    return vim.fn.systemlist('wl-psate --no-newline|sed -e "s/\r$//"', { '' }, 1)
+                end),
+                ["*"] = (function()
+                    return vim.fn.systemlist('wl-psate --primary --no-newline|sed -e "s/\r$//"', { '' }, 1)
+                end),
 
-        },
+            },
             cache_enabled = true,
         }
     end

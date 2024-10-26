@@ -28,13 +28,14 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "tsserver",
                 "csharp_ls",
                 "svelte",
+                "gopls",
+                "ts_ls",
+                "denols",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
