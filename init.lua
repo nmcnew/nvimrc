@@ -1,44 +1,6 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = true
-vim.o.smarttab = true
-vim.opt.termguicolors = true
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        "--filter=blob:none",
-        lazypath,
-    })
-end
-
-vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("plugins")
-require("kanagawa").load("wave")
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-
-
-require 'nvim-treesitter.configs'.setup {
-    ensure_installed = { "svelte", "typescript", "css", "html", "lua", "vim", "c_sharp", "vimdoc", "rust", "go" },
-    auto_install = true,
-    highlight = { enable = true },
-}
+require("config.lazy")
 
 local EditorGroup = vim.api.nvim_create_augroup('EditorGroup', {})
-
 vim.api.nvim_create_autocmd('LspAttach', {
     group = EditorGroup,
     callback = function(e)
