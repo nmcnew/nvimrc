@@ -11,4 +11,10 @@ return {
             end,
         },
     },
+    keys = {
+        { "<leader>ff", require('telescope.builtin').find_files, desc = "Find Files" },
+        { "<leader>fg", require('telescope.builtin').live_grep, desc = "Telescope Live grep" },
+        { "<leader>fb", require('telescope.builtin').buffers, desc = "Telescope Buffers" },
+        { "<leader>fh", require('telescope.builtin').help_tags, desc = "Telescope Help" },
+    },
 }
