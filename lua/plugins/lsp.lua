@@ -24,7 +24,7 @@ return {
                     },
                 })
                 return {
-                    ensure_installed = { "rust_analyzer", "gopls" },
+                    ensure_installed = { "rust_analyzer", "gopls", "ts_ls", "jdtls" },
                     automatic_enable = true,
                 }
             end
